@@ -388,8 +388,14 @@ namespace std
 	};
 }
 
-// ------------------
-// AGK
+//********************************************************************
+//********************************************************************
+//********************************************************************
+//********************************************************************
+//Copyright (c) 2015 Aiden Koss
+//Copyright (c) 2015 Open Systems International, Inc
+//Distributed under the Boost Software License, Version 1.0.
+//See http://www.boost.org/LICENSE_1_0.txt
 
 using namespace spimpl;
 
