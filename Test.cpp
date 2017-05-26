@@ -17,7 +17,7 @@ struct Test::Private
 };
 
 Test::Test(int i) 
-	: impl(make_impl_nocopy<Test::Private>(i, 6))
+	: impl(make_unique_impl<Test::Private>(i, 6))
 {
 	
 }
