@@ -32,9 +32,13 @@
 // TODO: auto detect std::auto_ptr support
 
 
+#ifndef PRIVATE_NS
+	#define PRIVATE_NS spimpl
+#endif
 
-namespace spimpl
-{
+#ifdef PRIVATE_NS
+	namespace PRIVATE_NS {
+#endif
 namespace details
 {
 template<class T>
@@ -407,13 +411,32 @@ inline unique_impl_ptr<T> make_unique_impl(Args&&... args)
 	static_assert(!std::is_array<T>::value, "unique_impl_ptr does not support arrays");
 	return unique_impl_ptr<T>(new T(std::forward<Args>(args)...), &details::default_delete<T>);
 }
+
+
+
+#ifdef PRIVATE_NS
 }
+#endif
+
 
 namespace std {
 template <class T, class D, class C>
-struct hash<spimpl::impl_ptr<T, D, C>>
+struct hash<
+	
+	#ifdef PRIVATE_NS
+		PRIVATE_NS::
+	#endif
+	
+	
+	impl_ptr<T, D, C>>
 {
-	using argument_type = spimpl::impl_ptr<T, D, C>;
+	using argument_type = 
+
+	#ifdef PRIVATE_NS
+		PRIVATE_NS::
+	#endif
+		
+		impl_ptr<T, D, C>;
 	using result_type = size_t;
 
 	result_type operator()(const argument_type& p) const SPIMPL_NOEXCEPT
@@ -435,7 +458,9 @@ struct hash<spimpl::impl_ptr<T, D, C>>
 //Distributed under the Boost Software License, Version 1.0.
 //See http://www.boost.org/LICENSE_1_0.txt
 
-using namespace spimpl;
+#ifdef PRIVATE_NS
+	using namespace PRIVATE_NS
+#endif
 
 #define ADDPRIVATE_STRUCT_COPYABLE \
 private:                       \
