@@ -406,7 +406,7 @@ template<class T, class Deleter = void(*)(T*)>
 using unique_impl_ptr = std::unique_ptr<T, Deleter>;
 
 template<class T, class... Args>
-inline unique_impl_ptr<T> make_unique_impl(Args&&... args)
+inline unique_impl_ptr<T> make_impl_nocopy(Args&&... args)
 {
 	static_assert(!std::is_array<T>::value, "unique_impl_ptr does not support arrays");
 	return unique_impl_ptr<T>(new T(std::forward<Args>(args)...), &details::default_delete<T>);
