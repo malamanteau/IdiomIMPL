@@ -459,7 +459,7 @@ struct hash<
 //See http://www.boost.org/LICENSE_1_0.txt
 
 #ifdef PRIVATE_NS
-	using namespace PRIVATE_NS
+using namespace PRIVATE_NS;
 #endif
 
 #define ADDPRIVATE_STRUCT_COPYABLE \
